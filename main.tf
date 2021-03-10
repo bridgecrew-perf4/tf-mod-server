@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "testbucket" {
   bucket_prefix = "testbucket"
 }
 
-resource "aws_s4_bucket" "non_existing_resource" {
+resource "aws_s3_bucket" "non_existing_resource" {
   bucket_prefix = "wrong-"
 }
 
