@@ -16,7 +16,7 @@ resource "aws_subnet" "public_subnet" {
   availability_zone = data.aws_availability_zones.az.names[0]
 
   tags = {
-    "Name"      = "pub-subnet"
+    "Name"      = "pub-subnet-gianluca"
     "Workspace" = terraform.workspace
   }
 }
@@ -25,4 +25,3 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_internet_gateway" "igw-nicola" {
   vpc_id = aws_vpc.my_vpc.id
 }
-
