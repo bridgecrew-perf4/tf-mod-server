@@ -2,24 +2,21 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_s3_bucket" "testbucket" {
-  bucket_prefix = "testbucket"
+data "aws_availability_zones" "az" {
+  state = "available"
 }
 
-resource "aws_s3_bucket" "non_existing_resource" {
-  bucket_prefix = "wrong-"
+resource "aws_vpc" "my_vpc" {
+  cidr_block = var.vpc_cidr_block
 }
 
-output "my_bucket_name" {
-  value = aws_s3_bucket.testbucket.id
-}
+resource "aws_subnet" "public_subnet" {
+  vpc_id            = aws_vpc.my_vpc.id
+  cidr_block        = cidrsubnet(var.vpc_cidr_block, 8, 0)
+  availability_zone = data.aws_availability_zones.az.names[0]
 
-terraform {
-  backend "remote" {
-    organization = "desotech"
-
-    workspaces {
-      name = "test"
-    }
+  tags = {
+    "Name"      = "pub-subnet"
+    "Workspace" = terraform.workspace
   }
 }
