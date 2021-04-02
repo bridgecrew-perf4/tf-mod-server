@@ -22,7 +22,7 @@ resource "aws_subnet" "public_subnet" {
 }
 
 
-resource "aws_internet_gateway" "igw" {
+resource "aws_internet_gateway" "igw-nicola" {
   vpc_id = aws_vpc.my_vpc.id
 }
 
