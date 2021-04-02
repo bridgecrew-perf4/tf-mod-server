@@ -20,3 +20,9 @@ resource "aws_subnet" "public_subnet" {
     "Workspace" = terraform.workspace
   }
 }
+
+
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.my_vpc.id
+}
+
